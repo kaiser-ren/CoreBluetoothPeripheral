@@ -193,14 +193,14 @@
                   central:(CBCentral *)central
 didSubscribeToCharacteristic:(CBCharacteristic *)characteristic {
   LXCBLog(@"didSubscribe: %@", characteristic.UUID);
-  LXCBLog(@"didSubscribe: - Central: %@", central.UUID);
+  //TODO: LXCBLog(@"didSubscribe: - Central: %@", central.UUID);
   [self.delegate peripheralServer:self centralDidSubscribe:central];
 }
 
 - (void)peripheralManager:(CBPeripheralManager *)peripheral
                   central:(CBCentral *)central
 didUnsubscribeFromCharacteristic:(CBCharacteristic *)characteristic {
-  LXCBLog(@"didUnsubscribe: %@", central.UUID);
+  //TODO:  LXCBLog(@"didUnsubscribe: %@", central.UUID);
   [self.delegate peripheralServer:self centralDidUnsubscribe:central];
 }
 
