@@ -13,11 +13,14 @@
 
 @property(nonatomic, strong) CBPeripheralManager *peripheral;
 @property(nonatomic, strong) CBMutableCharacteristic *characteristic;
+@property(nonatomic, strong) CBMutableCharacteristic *characteristic2;
+
 @property(nonatomic, assign) BOOL serviceRequiresRegistration;
 @property(nonatomic, strong) CBMutableService *service;
 @property(nonatomic, strong) NSData *pendingData;
 
 @end
+//04831523-6C9D-6CA9-5D41-03AD4FFF4ABB
 
 @implementation LXCBPeripheralServer
 
@@ -71,9 +74,13 @@
                  value:nil
            permissions:0];
 
+    self.characteristic2 = [[CBMutableCharacteristic alloc]
+                            initWithType:self.characteristicUUID2
+                            properties:CBCharacteristicPropertyRead
+                            value:nil
+                            permissions:0];
   // Assign the characteristic.
-  self.service.characteristics =
-      [NSArray arrayWithObject:self.characteristic];
+    self.service.characteristics = [NSArray arrayWithObjects:self.characteristic, self.characteristic2, nil];
 
   // Add the service to the peripheral manager.
   [self.peripheral addService:self.service];
@@ -93,11 +100,19 @@
     [self.peripheral stopAdvertising];
   }
 
-  NSDictionary *advertisment = @{
-      CBAdvertisementDataServiceUUIDsKey : @[self.serviceUUID],
-      CBAdvertisementDataLocalNameKey: self.serviceName
-  };
-  [self.peripheral startAdvertising:advertisment];
+  //NSDictionary *advertisment = @{
+  //    CBAdvertisementDataServiceUUIDsKey : @[self.serviceUUID],
+  //    CBAdvertisementDataLocalNameKey: @"Hello"
+  //};
+  //[self.peripheral startAdvertising:advertisment];
+    
+    //CBUUID *myServiceUUID1 = [CBUUID UUIDWithString:@"71DA3FD1-7E10-41C1-B16F-4430B506CDE7"];
+    //CBUUID *myServiceUUID2 = [CBUUID UUIDWithString:@"71DA3FD1-7E11-41C1-B16F-4430B506CDE7"];
+    
+    //CBUUID *firstCharUUID = [CBUUID UUIDWithString:@"04831524-6C9D-6CA9-5D41-03AD4FFF4ABB"];
+    //CBUUID *secondCharUUID = [CBUUID UUIDWithString:@"04831525-6C9D-6CA9-5D41-03AD4FFF4ABB"];
+
+    [self.peripheral startAdvertising: @{CBAdvertisementDataLocalNameKey: @"Nordic_ATT_MTU" }];
 }
 
 - (void)stopAdvertising {

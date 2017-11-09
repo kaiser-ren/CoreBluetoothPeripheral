@@ -36,8 +36,9 @@
 
   self.peripheral = [[LXCBPeripheralServer alloc] initWithDelegate:self];
   self.peripheral.serviceName = @"Kai's iPhone";
-  self.peripheral.serviceUUID = [CBUUID UUIDWithString:@"7e57"];
-  self.peripheral.characteristicUUID = [CBUUID UUIDWithString:@"b71e"];
+  self.peripheral.serviceUUID = [CBUUID UUIDWithString:@"04831523-6C9D-6CA9-5D41-03AD4FFF4ABB"];
+  self.peripheral.characteristicUUID = [CBUUID UUIDWithString:@"04831524-6C9D-6CA9-5D41-03AD4FFF4ABB"];
+    self.peripheral.characteristicUUID2 = [CBUUID UUIDWithString:@"04831525-6C9D-6CA9-5D41-03AD4FFF4ABB"];
   [self.peripheral startAdvertising];
 
   return YES;
